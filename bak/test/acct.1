@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+require "/home/lowk/bin/lowlib.pl";
+
+my $email_regex = qr/^(\w+)(\.\w+){1,}(-contractor)?\@adp\.com$/;
+
+my @email = read_file('email');
+foreach my $address ( @{email} )
+{
+   chomp(${address});
+   if ( ${address} =~ ${email_regex} )
+   {
+      my ${first_name} = $1;
+      my ${last_name} = $2;
+      if ( ${last_name} =~ /^\.(\w+)$/ )
+      {
+         ${last_name}=$1;
+      }
+      print("${address}\n");
+      printf("First\t%s\n", ${first_name});
+      printf("Last\t%s\n", ${last_name});
+   }
+   else
+   {
+      printf("NOT ADP\t%s\n", ${address});
+   }
+   print"\n";
+}

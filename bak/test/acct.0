@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+require "/home/lowk/bin/lowlib.pl";
+
+my $email_regex = qr/\@adp\.com$/;
+
+my @email = read_file('email');
+foreach my $address ( @{email} )
+{
+   chomp(${address});
+   if ( ${address} =~ ${email_regex} )
+   {
+      print("${address}\n");
+   }
+   else
+   {
+      printf("NOT ADP\t%s\n", ${address});
+   }
+}
